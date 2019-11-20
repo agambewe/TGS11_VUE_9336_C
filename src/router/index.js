@@ -17,7 +17,15 @@ const routes = [
             },
             { 
                 name: 'login', 
-                path: '/login', 
+                path: '/login',
+                beforeEnter: (to, from, next) => {
+                    if(!localStorage.getItem('token')) {
+                        // or however you store your logged in state
+                        next(); // allow to enter route
+                    } else{
+                        next('/login'); // go to '/login';
+                    }
+                },  
                 component: loginLayout
             },
             { 
